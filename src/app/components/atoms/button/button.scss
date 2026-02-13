@@ -1,0 +1,38 @@
+:host {
+  --wc-button-padding-y: var(--space-sm);
+  --wc-button-padding-x: var(--space-md);
+  --wc-button-font-size: var(--font-size-md);
+  --wc-button-font-family: var(--font-family);
+  --wc-button-bg: var(--color-primary);
+  --wc-button-bg-hover: var(--color-primary-hover);
+  --wc-button-bg-active: var(--color-primary-active);
+  --wc-button-bg-disabled: var(--color-disabled);
+  --wc-button-color: var(--color-bg);
+  --wc-button-radius: var(--radius-md);
+  --wc-button-transition: var(--transition-medium);
+}
+
+button {
+  padding: var(--wc-button-padding-y) var(--wc-button-padding-x);
+  font-size: var(--wc-button-font-size);
+  font-family: var(--wc-button-font-family);
+  background-color: var(--wc-button-bg);
+  color: var(--wc-button-color);
+  border-radius: var(--wc-button-radius);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--wc-button-transition);
+
+  &:hover {
+    background-color: var(--wc-button-bg-hover);
+  }
+
+  &:active {
+    background-color: var(--wc-button-bg-active);
+  }
+
+  &:disabled {
+    background-color: var(--wc-button-bg-disabled);
+    cursor: not-allowed;
+  }
+}

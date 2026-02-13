@@ -1,0 +1,15 @@
+:host {
+    --wc-input-display: inline-block;
+    --wc-input-padding: 0.5em;
+    --wc-input-radius: var(--radius-sm);
+    --wc-input-font-size: var(--font-size-md);
+    --wc-input-border: 1px solid #ccc;
+}
+
+input {
+    display: var(--wc-input-display);
+    padding: var(--wc-input-padding);
+    border-radius: var(--wc-input-radius);
+    border: var(--wc-input-border);
+    font-size: var(--wc-input-font-size);
+}

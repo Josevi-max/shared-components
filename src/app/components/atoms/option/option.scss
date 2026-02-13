@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  padding: var(--wc-select-option-padding, 0.5rem);
+  cursor: pointer;
+}
+
+:host(:hover) {
+  background: var(--wc-select-option-hover-bg, #f5f5f5);
+}
+
+:host([selected]) {
+  background: var(--wc-select-option-selected-bg, #eaeaea);
+}

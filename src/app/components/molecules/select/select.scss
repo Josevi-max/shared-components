@@ -1,0 +1,11 @@
+.options-container {
+    display: none;
+}
+
+.options-container.open {
+    display: block;
+}
+
+.select-display:hover { 
+    cursor: pointer; 
+}
