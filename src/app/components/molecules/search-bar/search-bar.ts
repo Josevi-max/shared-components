@@ -1,5 +1,5 @@
 import { LitElement, css, unsafeCSS } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import  searchBarStyles  from './search-bar.scss?inline';
 import  {searchBarTemplate}  from './search-bar.template';
 
@@ -21,6 +21,18 @@ export class WcSearchBar extends LitElement {
 
   onValueChange(e: CustomEvent<string>) {
     this.value = e.detail;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('value-change', this.onValueChange as EventListener);
+    this.addEventListener('button-clicked', this.onSearch as EventListener);
+  }
+
+  override disconnectedCallback() {
+    this.removeEventListener('value-change', this.onValueChange as EventListener);
+    this.removeEventListener('button-clicked', this.onSearch as EventListener);
+    super.disconnectedCallback();
   }
 
   onSearch() {

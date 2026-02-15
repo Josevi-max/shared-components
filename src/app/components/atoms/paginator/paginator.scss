@@ -1,0 +1,120 @@
+.paginator {
+	display: block;
+	margin-top: 0.5rem;
+
+	@media (min-width: 1024px) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 0;
+	}
+}
+
+.paginator__controls {
+	display: flex;
+	justify-content: center;
+	gap: 0.25rem;
+
+	@media (min-width: 1024px) {
+		justify-content: flex-start;
+	}
+}
+
+.paginator__button {
+	border-radius: 9999px;
+	border: 1px solid #cbd5e1;
+	padding: 0.375rem 0.5rem;
+	font-size: 0.875rem;
+	background: transparent;
+	color: #475569;
+	cursor: pointer;
+	transition: background .15s ease, color .15s ease;
+}
+
+.paginator__button--nav:hover {
+	background: #0f172a;
+	color: #fff;
+}
+
+.paginator__button--active {
+	min-width: 2rem;
+	border-radius: 9999px;
+	background: #0f172a;
+	color: #fff;
+	padding: 0.375rem 0.5rem;
+	font-size: 0.875rem;
+}
+
+.paginator__button--page {
+	min-width: 2rem;
+	border: 1px solid #cbd5e1;
+}
+
+.paginator__dots {
+	display: none;
+	padding: 0 0.5rem;
+	color: #64748b;
+}
+
+@media (min-width: 640px) {
+	.paginator__dots {
+		display: inline;
+	}
+	.paginator__button--page {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.paginator__page-size {
+	display: flex;
+	justify-content: center;
+	margin-top: 0.5rem;
+
+	@media (min-width: 1024px) {
+		margin-top: 0;
+		justify-content: flex-end;
+	}
+}
+
+.paginator__page-size-inner {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.paginator__label {
+	margin-right: 0.5rem;
+	font-size: 0.875rem;
+	color: #334155;
+}
+
+.paginator__select {
+	width: 5rem;
+	background: #fff;
+	color: #334155;
+	font-size: 0.875rem;
+	border: 1px solid #e6eef6;
+	border-radius: 0.25rem;
+	padding: 0.375rem 2.125rem 0.375rem 0.5rem;
+	appearance: none;
+	cursor: pointer;
+	box-shadow: 0 1px 2px rgba(2,6,23,0.04);
+}
+
+.paginator__select:focus {
+	outline: none;
+	border-color: #94a3b8;
+}
+
+.paginator__icon {
+	position: absolute;
+	right: 0.25rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #9ca3af;
+	font-size: 0.875rem;
+	pointer-events: none;
+}
+

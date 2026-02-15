@@ -10,6 +10,15 @@ export class WcButton extends LitElement {
    declare disabled: boolean;
    
   override render() {
-    return html`<button ?disabled=${this.disabled} ><slot></slot></button>`;
+    return html`<button @click=${this.handleClick} ?disabled=${this.disabled} ><slot></slot></button>`;
   }
+
+  private handleClick = () => {
+    this.dispatchEvent(
+      new CustomEvent('button-clicked', {
+        bubbles: true,
+        composed: true,
+      })
+    );
+  };
 }
