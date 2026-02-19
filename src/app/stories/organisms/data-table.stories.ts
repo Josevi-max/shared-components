@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import '../../components/organisms/data-table/data-table';
 import { html } from 'lit';
 

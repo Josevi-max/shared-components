@@ -1,15 +1,16 @@
 :host {
-  --wc-button-padding-y: var(--space-sm);
-  --wc-button-padding-x: var(--space-md);
-  --wc-button-font-size: var(--font-size-md);
-  --wc-button-font-family: var(--font-family);
-  --wc-button-bg: var(--color-primary);
-  --wc-button-bg-hover: var(--color-primary-hover);
-  --wc-button-bg-active: var(--color-primary-active);
-  --wc-button-bg-disabled: var(--color-disabled);
-  --wc-button-color: var(--color-bg);
-  --wc-button-radius: var(--radius-md);
-  --wc-button-transition: var(--transition-medium);
+  // Valores por defecto usando fallbacks
+  --wc-button-padding-y: var(--space-sm, 0.5rem);
+  --wc-button-padding-x: var(--space-md, 1rem);
+  --wc-button-font-size: var(--font-size-md, 1rem);
+  --wc-button-font-family: var(--font-family, sans-serif);
+  --wc-button-bg: var(--color-primary, #007bff);
+  --wc-button-bg-hover: var(--color-primary-hover, #0056b3);
+  --wc-button-bg-active: var(--color-primary-active, #004085);
+  --wc-button-bg-disabled: var(--color-disabled, #6c757d);
+  --wc-button-color: var(--color-bg, #ffffff);
+  --wc-button-radius: var(--radius-md, 4px);
+  --wc-button-transition: var(--transition-medium, 0.3s);
 }
 
 button {
@@ -23,16 +24,17 @@ button {
   cursor: pointer;
   transition: background-color var(--wc-button-transition);
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--wc-button-bg-hover);
   }
 
-  &:active {
+  &:active:not(:disabled) {
     background-color: var(--wc-button-bg-active);
   }
 
   &:disabled {
     background-color: var(--wc-button-bg-disabled);
     cursor: not-allowed;
+    opacity: 0.65;
   }
 }

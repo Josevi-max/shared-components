@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import '../../components/atoms/input/input';
 import { WcInput } from '../../components/atoms/input/input';
 

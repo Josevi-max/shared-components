@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import '../../components/atoms/button/button';
 
 const meta: Meta = {
@@ -80,7 +80,7 @@ export const CustomTokens: Story = {
     label: 'Custom',
     bgColor: '#ec4899',
     radius: '0',
-    paddingX: '2rem',
+    paddingX: '20px',
   },
   render: Template,
 };

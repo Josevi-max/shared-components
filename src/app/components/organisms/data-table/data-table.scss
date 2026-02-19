@@ -1,0 +1,406 @@
+// data-table.scss
+:host {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  padding: 20px;
+}
+
+.data-table {
+  width: 100%;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff, #fafafa);
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 
+      0 20px 30px -10px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  }
+}
+
+.results-info {
+    padding: 12px 24px;
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    border-top: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+// Header con efectos de vidrio
+.search-container {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f9fafc 0%, #f3f4f6 100%);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  position: relative;
+  
+  // Efecto de brillo superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.8), 
+      transparent
+    );
+  }
+
+  wc-search-bar {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+    justify-content: right;
+    // Animación de entrada
+    animation: slideInRight 0.4s ease-out;
+  }
+
+  wc-input {
+    flex: 1;
+    
+    --input-padding: 10px 16px;
+    --input-border-radius: 10px;
+    --input-border-color: #e2e8f0;
+    --input-focus-border-color: #6366f1;
+    --input-focus-ring: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    --input-transition: all 0.2s ease;
+    
+    // Efecto glassmorphism
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  wc-button {
+    --button-padding: 10px 24px;
+    --button-bg: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --button-bg-hover: linear-gradient(135deg, #4f46e5, #7c3aed);
+    --button-border-radius: 10px;
+    --button-color: white;
+    --button-font-weight: 500;
+    --button-transition: all 0.2s ease;
+    
+    // Sombra para el botón
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 10px -1px rgba(99, 102, 241, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px -1px rgba(99, 102, 241, 0.2);
+    }
+  }
+}
+
+// Contenedor de la tabla con efectos de scroll
+.table-container {
+  padding: 0 24px;
+  background: white;
+  position: relative;
+  
+  // Sombra indicadora de scroll
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  // Mostrar sombra cuando hay scroll
+  &.can-scroll::after {
+    opacity: 1;
+  }
+  
+  wc-table {
+    --table-header-bg: #f8fafc;
+    --table-header-color: #1e293b;
+    --table-header-font-weight: 600;
+    --table-row-hover-bg: #f1f5f9;
+    --table-border-color: #e2e8f0;
+    --table-padding: 16px 12px;
+    --table-font-size: 14px;
+    
+    display: block;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    
+    // Animación de entrada para las filas
+    animation: fadeInUp 0.5s ease-out;
+    
+    // Efectos de hover en filas
+    tbody tr {
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: var(--table-row-hover-bg);
+        transform: scale(1.002);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      }
+      
+      // Animación para nuevas filas
+      &.new-row {
+        animation: highlightRow 1s ease-out;
+      }
+    }
+    
+    // Estilo para celdas
+    td, th {
+      padding: var(--table-padding);
+      border-bottom: 1px solid var(--table-border-color);
+      transition: background-color 0.2s ease;
+      
+      &:first-child {
+        padding-left: 20px;
+      }
+      
+      &:last-child {
+        padding-right: 20px;
+      }
+    }
+    
+    // Cabeceras con efecto de gradiente
+    th {
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1);
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+// Paginador mejorado
+wc-paginator {
+  display: block;
+  padding: 16px 24px 20px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  border-top: 1px solid #e2e8f0;
+  
+  --paginator-button-bg: white;
+  --paginator-button-hover-bg: #f1f5f9;
+  --paginator-button-active-bg: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --paginator-button-active-color: white;
+  --paginator-border-radius: 8px;
+  --paginator-font-size: 14px;
+  
+  // Animación para cambios de página
+  animation: fadeIn 0.3s ease-out;
+  
+  // Efectos hover en botones
+  .paginator-button {
+    transition: all 0.2s ease;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Estados vacíos o de carga
+.data-table {
+  &.loading {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 20;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    &::after {
+      content: 'Cargando...';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #6366f1;
+      font-weight: 500;
+      z-index: 21;
+      animation: fadeInOut 1.5s ease-in-out infinite;
+    }
+  }
+  
+  &.empty {
+    .table-container {
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &::before {
+        content: '📊 No hay datos disponibles';
+        color: #94a3b8;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 40px;
+        text-align: center;
+        background: #f8fafc;
+        border-radius: 12px;
+        border: 2px dashed #e2e8f0;
+      }
+    }
+  }
+}
+
+// Animaciones
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes highlightRow {
+  0% {
+    background-color: rgba(99, 102, 241, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .search-container {
+    padding: 16px;
+    
+    wc-search-bar {
+      flex-direction: column;
+      max-width: 100%;
+    }
+  }
+  
+  .table-container {
+    padding: 0 16px;
+    overflow-x: auto;
+    
+    wc-table {
+      min-width: 600px;
+    }
+  }
+  
+  wc-paginator {
+    padding: 16px;
+  }
+}
+
+// Tema oscuro (opcional)
+@media (prefers-color-scheme: dark) {
+  :host-context(.dark-theme) {
+    .data-table {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border-color: #334155;
+      
+      .search-container {
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        border-bottom-color: #334155;
+        
+        wc-input {
+          --input-bg: #1e293b;
+          --input-color: #f1f5f9;
+          --input-border-color: #334155;
+        }
+      }
+      
+      .table-container {
+        background: #0f172a;
+        
+        wc-table {
+          --table-header-bg: #1e293b;
+          --table-header-color: #f1f5f9;
+          --table-row-hover-bg: #1e293b;
+          --table-border-color: #334155;
+          
+          th {
+            background: linear-gradient(180deg, #1e293b, #0f172a);
+          }
+        }
+      }
+      
+      wc-paginator {
+        background: linear-gradient(180deg, #1e293b, #0f172a);
+        border-top-color: #334155;
+      }
+    }
+  }
+}

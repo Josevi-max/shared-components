@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
-import '../../components/atoms/paginator/paginator';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import '../../components/molecules/paginator/paginator';
 import { html } from 'lit';
 
 const meta: Meta = {
-  title: 'Atoms/Paginator',
+  title: 'Molecules/Paginator',
   component: 'wc-paginator',
   argTypes: {
     actualPage: { control: 'number' },

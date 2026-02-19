@@ -1,4 +1,4 @@
-import { LitElement, html, css, unsafeCSS } from 'lit';
+import { LitElement, css, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import paginatorStyles from './paginator.scss?inline';
 import { paginatorTemplate } from './paginator.template';

@@ -19,5 +19,12 @@ export default defineConfig({
   },
   server: {
     port: 5173
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Esto ya funciona! Vite pre-compila el SCSS
+      }
+    }
   }
 });

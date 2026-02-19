@@ -28,14 +28,17 @@ export const paginatorTemplate = (host: WcPaginator) => html`
             <button @click=${() => host.nextPage()} ?disabled=${host.isLastPage()} class="paginator__button paginator__button--nav">Sig</button>
         </div>
 
-        <div class="paginator__page-size">
-            <div class="paginator__page-size-inner">
-                <p class="paginator__label">Elementos</p>
-                <select @change=${(e: Event) => host.onPageSizeChange(e)} class="paginator__select">
-                    ${repeat(host.getPageSizeOptions(), (size: number) => size, (size: number) => html`<option value=${size}>${size}</option>`)}
-                </select>
-                <slot name="icon" class="paginator__icon""></slot>
-            </div>
-        </div>
+        
+                <wc-select
+                .value=${host.pageSizeOptions[0]}
+                @change=${host.onPageSizeChange}
+                >
+                <span slot="displayName">Elementos</span>
+                    ${repeat(host.pageSizeOptions, (option: number) => html`
+                        <div class="paginator__option">
+                            <wc-option .value="${option}">${option} elementos</wc-option>
+                        </div>
+                    `)}
+                </wc-select>
     </nav>
 `;

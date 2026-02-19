@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import dataTableStyles from './data-table.scss?inline';
 import { dataTableTemplate } from './data-table.template';
 import { TableColumn } from '../../atoms/table/table.model';
-import { PageEvent } from '../../atoms/paginator/paginator.model';
+import { PageEvent } from '../../molecules/paginator/paginator.model';
 
 @customElement('wc-data-table')
 export class WcDataTable extends LitElement {
@@ -18,6 +18,10 @@ export class WcDataTable extends LitElement {
   @property({ type: Array }) declare pageSizeOptions: number[];
   @property({ type: String }) declare placeholder: string;
 
+  @property({ type: Boolean }) declare loading: boolean;
+  @property({ type: Number }) declare currentPage: number;
+  @property({ type: Boolean }) declare showStats: boolean;
+
   constructor() {
     super();
     this.searchTerm = '';
@@ -28,10 +32,18 @@ export class WcDataTable extends LitElement {
     this.paginatedData = [];
     this.pageSize = 10;
     this.pageSizeOptions = [5, 10, 15];
+    this.loading = false;
+    this.currentPage = 0;
+    this.showStats = true;
   }
 
   override render() {
     return dataTableTemplate(this);
+  }
+
+  public handlePageChange(e: CustomEvent<PageEvent>) {
+    this.currentPage = e.detail.pageIndex;
+    this.onPageChange(e);
   }
 
   override updated(changed: Map<string, unknown>) {

@@ -71,18 +71,13 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 0.5rem;
-
+	
 	@media (min-width: 1024px) {
 		margin-top: 0;
 		justify-content: flex-end;
 	}
 }
 
-.paginator__page-size-inner {
-	position: relative;
-	display: flex;
-	align-items: center;
-}
 
 .paginator__label {
 	margin-right: 0.5rem;

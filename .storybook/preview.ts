@@ -1,8 +1,15 @@
-import '../src/app/components/tokens/colors.scss';
-import '../src/app/components/tokens/spacing.scss';
-import '../src/app/components/tokens/typography.scss';
-import '../src/app/components/tokens/radius.scss';
+import type { Preview } from '@storybook/web-components-vite';
 
-export const parameters = {
-  actions: { argTypesRegex: '^on.*' },
+const preview: Preview = {
+  parameters: {
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+  },
 };
+
+export default preview;
