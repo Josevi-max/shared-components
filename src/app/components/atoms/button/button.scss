@@ -1,5 +1,4 @@
 :host {
-  // Valores por defecto usando fallbacks
   --wc-button-padding-y: var(--space-sm, 0.5rem);
   --wc-button-padding-x: var(--space-md, 1rem);
   --wc-button-font-size: var(--font-size-md, 1rem);
@@ -11,6 +10,7 @@
   --wc-button-color: var(--color-bg, #ffffff);
   --wc-button-radius: var(--radius-md, 4px);
   --wc-button-transition: var(--transition-medium, 0.3s);
+  --wc-button-width: 100%;
 }
 
 button {
@@ -23,7 +23,7 @@ button {
   border: none;
   cursor: pointer;
   transition: background-color var(--wc-button-transition);
-
+  width: var(--wc-button-width);
   &:hover:not(:disabled) {
     background-color: var(--wc-button-bg-hover);
   }

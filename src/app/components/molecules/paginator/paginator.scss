@@ -20,6 +20,19 @@
 	}
 }
 
+.paginator__info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0.5rem;
+
+	@media (min-width: 1024px) {
+		margin-top: 0;
+		justify-content: flex-end;
+		width: 20%;
+	}
+}
+
 .paginator__button {
 	border-radius: 9999px;
 	border: 1px solid #cbd5e1;

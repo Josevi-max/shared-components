@@ -37,6 +37,12 @@ const meta: Meta = {
       name: '--wc-button-bg-hover',
       control: 'color',
       table: { category: 'CSS Tokens' },
+    },
+    
+    width: {
+      name: '--wc-button-width',
+      control: 'text',
+      table: { category: 'CSS Tokens' },
     }
   },
 };
@@ -51,6 +57,7 @@ const Template = (args: any) => {
     ${args.paddingX ? `--wc-button-padding-x: ${args.paddingX};` : ''}
     ${args.color ? `--wc-button-color: ${args.color};` : ''}
     ${args.hoverColor ? `--wc-button-bg-hover: ${args.hoverColor};` : ''}
+    ${args.width ? `--wc-button-width: ${args.width};` : ''}
   `;
 
   return `

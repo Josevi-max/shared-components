@@ -1,4 +1,10 @@
 .search-bar {
   display: flex;
   gap: 0.5em;
+  @media (max-width: 640px) {
+      flex-direction: column;
+      wc-button {
+        width: 100%;
+      }
+    }
 }

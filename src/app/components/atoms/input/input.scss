@@ -1,15 +1,32 @@
 :host {
-    --wc-input-display: inline-block;
-    --wc-input-padding: 0.5em;
-    --wc-input-radius: var(--radius-sm);
-    --wc-input-font-size: var(--font-size-md);
-    --wc-input-border: 1px solid #ccc;
+  --wc-input-display: block;  // Cambiado a block
+  --wc-input-padding: 0.5em;
+  --wc-input-radius: var(--radius-sm);
+  --wc-input-font-size: var(--font-size-md);
+  --wc-input-border: 1px solid #ccc;
+  --wc-input-border-color-focus: #3b82f6;
+  --wc-input-bg: white;
+  --wc-input-color: #1f2937;
 }
 
 input {
-    display: var(--wc-input-display);
-    padding: var(--wc-input-padding);
-    border-radius: var(--wc-input-radius);
-    border: var(--wc-input-border);
-    font-size: var(--wc-input-font-size);
+  display: var(--wc-input-display);
+  padding: var(--wc-input-padding);
+  border-radius: var(--wc-input-radius);
+  border: var(--wc-input-border);
+  font-size: var(--wc-input-font-size);
+  background-color: var(--wc-input-bg);
+  color: var(--wc-input-color);
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  transition: all 0.2s ease;
+  &:focus {
+    outline: none;
+    border-color: var(--wc-input-border-color-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 }
