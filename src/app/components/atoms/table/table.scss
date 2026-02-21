@@ -1,0 +1,121 @@
+// table.scss
+:host {
+  --wc-table-border: 1px solid #e5e7eb;
+  --wc-table-border-radius: 8px;
+  --wc-table-background: #ffffff;
+  --wc-table-header-bg: #f9fafb;
+  --wc-table-header-color: #374151;
+  --wc-table-row-hover-bg: #f3f4f6;
+  --wc-table-row-odd-bg: #ffffff;
+  --wc-table-row-even-bg: #f9fafb;
+  --wc-table-padding: 12px 16px;
+  --wc-table-font-size: 0.875rem;
+  --wc-table-font-family: inherit;
+  --wc-table-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --wc-table-border-collapse: separate;
+  --wc-table-border-spacing: 0;
+  --wc-table-caption-side: bottom;
+  --wc-table-empty-cell-bg: inherit;
+  --wc-table-hover-transition: background-color 0.2s ease;
+}
+
+table {
+  width: 100%;
+  border-collapse: var(--wc-table-border-collapse);
+  border-spacing: var(--wc-table-border-spacing);
+  background-color: var(--wc-table-background);
+  border-radius: var(--wc-table-border-radius);
+  box-shadow: var(--wc-table-box-shadow);
+  font-family: var(--wc-table-font-family);
+  font-size: var(--wc-table-font-size);
+  overflow: hidden;
+}
+
+thead {
+  background-color: var(--wc-table-header-bg);
+  color: var(--wc-table-header-color);
+  font-weight: 600;
+  text-align: left;
+  
+  th {
+    padding: var(--wc-table-padding);
+    border-bottom: var(--wc-table-border);
+    
+    &:first-child {
+      border-top-left-radius: var(--wc-table-border-radius);
+    }
+    
+    &:last-child {
+      border-top-right-radius: var(--wc-table-border-radius);
+    }
+  }
+}
+
+tbody {
+  tr {
+    transition: var(--wc-table-hover-transition);
+    cursor: pointer;
+    
+    &:nth-child(odd) {
+      background-color: var(--wc-table-row-odd-bg);
+    }
+    
+    &:nth-child(even) {
+      background-color: var(--wc-table-row-even-bg);
+    }
+    
+    &:hover {
+      background-color: var(--wc-table-row-hover-bg);
+    }
+    
+    &:last-child {
+      td:first-child {
+        border-bottom-left-radius: var(--wc-table-border-radius);
+      }
+      
+      td:last-child {
+        border-bottom-right-radius: var(--wc-table-border-radius);
+      }
+    }
+  }
+  
+  td {
+    padding: var(--wc-table-padding);
+    border-bottom: var(--wc-table-border);
+    
+    &:empty::before {
+      content: "—";
+      color: #9ca3af;
+      font-style: italic;
+    }
+  }
+}
+
+// Estilo para cuando no hay datos
+:host([data-empty]) {
+  tbody tr {
+    cursor: default;
+    
+    &:hover {
+      background-color: inherit;
+    }
+    
+    td {
+      text-align: center;
+      color: #6b7280;
+      font-style: italic;
+      padding: calc(var(--wc-table-padding) * 2);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 640px) {
+  table {
+    font-size: calc(var(--wc-table-font-size) * 0.9);
+  }
+  
+  th, td {
+    padding: calc(var(--wc-table-padding) * 0.75);
+  }
+}

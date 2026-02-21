@@ -10,8 +10,10 @@ export const selectTemplate = (host: WcSelect) => html`
     >
       <slot name="displayName"></slot>
     </div>
-    <div class="options-container ${host.open ? 'open' : ''}">
-      <slot></slot>
+    <div class="options-wrapper">
+      <div class="options-container ${host.open ? 'open' : ''}">
+        <slot></slot>
+      </div>
     </div>
   </div>
 `;

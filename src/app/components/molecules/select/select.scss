@@ -1,38 +1,77 @@
 // select.scss
 :host {
+  // Display
+  --wc-select-width: 100%;
+  --wc-select-max-width: 300px;
+  
+  // Select display
+  --wc-select-background: #ffffff;
+  --wc-select-border: 1px solid #d1d5db;
+  --wc-select-border-radius: 8px;
+  --wc-select-border-color-focus: #3b82f6;
+  --wc-select-border-color-error: #ef4444;
+  --wc-select-border-color-success: #10b981;
+  --wc-select-box-shadow: none;
+  --wc-select-box-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  --wc-select-padding: 10px 14px;
+  --wc-select-font-size: 14px;
+  --wc-select-color: #1f2937;
+  --wc-select-placeholder-color: #9ca3af;
+  --wc-select-arrow-color: #6b7280;
+  --wc-select-arrow-size: 8px;
+  
+  // Options container
+  --wc-select-options-max-height: 250px;
+  --wc-select-options-min-width: 180px; // Nueva: ancho mínimo
+  --wc-select-options-background: #ffffff;
+  --wc-select-options-border: 1px solid #e5e7eb;
+  --wc-select-options-border-radius: 8px;
+  --wc-select-options-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --wc-select-options-z-index: 1000;
+  
+  --wc-select-animation-duration: 0.15s;
+  --wc-select-animation-timing: ease;
+
   display: inline-block;
   position: relative;
-  width: 100%;
-  max-width: 300px;
+  width: var(--wc-select-width);
+  max-width: var(--wc-select-max-width);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
 }
 
 .select-display {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: var(--wc-select-padding);
+  background-color: var(--wc-select-background);
+  border: var(--wc-select-border);
+  border-radius: var(--wc-select-border-radius);
+  font-size: var(--wc-select-font-size);
   line-height: 1.5;
-  color: #1f2937;
+  color: var(--wc-select-color);
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 20px;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
   
-  // Flecha indicadora (simula el select nativo)
   &::after {
     content: '';
-    width: 8px;
-    height: 8px;
-    border: solid #6b7280;
+    width: var(--wc-select-arrow-size);
+    height: var(--wc-select-arrow-size);
+    border: solid var(--wc-select-arrow-color);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     margin-left: 8px;
-    transition: transform 0.2s ease;
+    transition: transform var(--wc-select-animation-duration) var(--wc-select-animation-timing);
+    flex-shrink: 0;
   }
   
   &:hover {
@@ -42,43 +81,42 @@
   
   &:focus-within {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--wc-select-border-color-focus);
+    box-shadow: var(--wc-select-box-shadow-focus);
   }
   
-  // Cuando el select está abierto, rotamos la flecha
   :host([open]) &::after {
     transform: rotate(-135deg);
     margin-top: -4px;
   }
   
-  // Estilo para cuando hay un valor seleccionado
-  &:not(:empty) {
-    color: #111827;
-  }
-  
-  // Placeholder cuando no hay selección
   &:empty::before {
     content: attr(data-placeholder);
-    color: #9ca3af;
+    color: var(--wc-select-placeholder-color);
   }
+}
+
+.options-wrapper {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;
+  width: auto;
+  z-index: var(--wc-select-options-z-index);
 }
 
 .options-container {
   display: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  max-height: 250px;
+  max-height: var(--wc-select-options-max-height);
+  min-width: var(--wc-select-options-min-width);
+  width: max-content;
+  max-width: min(calc(100vw - 32px), 400px);
   overflow-y: auto;
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  z-index: 1000;
+  background-color: var(--wc-select-options-background);
+  border: var(--wc-select-options-border);
+  border-radius: var(--wc-select-options-border-radius);
+  box-shadow: var(--wc-select-options-box-shadow);
   
-  // Scroll personalizado
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -99,15 +137,24 @@
   
   &.open {
     display: block;
-    animation: fadeIn 0.15s ease;
+    animation: fadeIn var(--wc-select-animation-duration) var(--wc-select-animation-timing);
   }
   
-  // Estilos para los slots de opciones
   ::slotted(wc-option) {
     display: block;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    ::slotted(*) {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   
-  // Si quieres estilizar directamente los elementos de opción
   ::slotted(wc-option:hover) {
     background-color: #f3f4f6;
   }
@@ -135,7 +182,7 @@
 
 :host([error]) {
   .select-display {
-    border-color: #ef4444;
+    border-color: var(--wc-select-border-color-error);
     
     &:focus-within {
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
@@ -145,7 +192,7 @@
 
 :host([success]) {
   .select-display {
-    border-color: #10b981;
+    border-color: var(--wc-select-border-color-success);
     
     &:focus-within {
       box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
@@ -153,7 +200,17 @@
   }
 }
 
-// Animaciones
+@media (max-width: 640px) {
+  .options-wrapper {
+    left: 0;
+    right: auto;
+  }
+  
+  .options-container {
+    max-width: min(calc(100vw - 32px), 100%);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -165,19 +222,20 @@
   }
 }
 
-// Versión compacta
 :host([size="small"]) {
+  --wc-select-padding: 6px 10px;
+  --wc-select-font-size: 12px;
+  
   .select-display {
-    padding: 6px 10px;
-    font-size: 12px;
     min-height: 16px;
   }
 }
 
 :host([size="large"]) {
+  --wc-select-padding: 12px 16px;
+  --wc-select-font-size: 16px;
+  
   .select-display {
-    padding: 12px 16px;
-    font-size: 16px;
     min-height: 24px;
   }
 }

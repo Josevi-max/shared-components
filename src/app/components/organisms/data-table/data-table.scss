@@ -264,18 +264,7 @@ wc-paginator {
       display: flex;
       align-items: center;
       justify-content: center;
-      
-      &::before {
-        content: '📊 No hay datos disponibles';
-        color: #94a3b8;
-        font-size: 16px;
-        font-weight: 500;
-        padding: 40px;
-        text-align: center;
-        background: #f8fafc;
-        border-radius: 12px;
-        border: 2px dashed #e2e8f0;
-      }
+      display: none;
     }
   }
 }

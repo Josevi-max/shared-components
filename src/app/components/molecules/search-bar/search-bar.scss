@@ -1,10 +1,73 @@
+// search-bar.scss
+:host {
+  // CSS Custom Properties
+  --search-bar-gap: 0.5em;
+  --search-bar-padding: 0;
+  --search-bar-background: transparent;
+  --search-bar-border-radius: 0;
+  --search-bar-box-shadow: none;
+  --search-bar-width: auto;
+  --search-bar-max-width: none;
+  --search-bar-mobile-breakpoint: 640px;
+
+  display: block;
+  width: var(--search-bar-width);
+  max-width: var(--search-bar-max-width);
+  background: var(--search-bar-background);
+  border-radius: var(--search-bar-border-radius);
+  box-shadow: var(--search-bar-box-shadow);
+}
+
 .search-bar {
   display: flex;
-  gap: 0.5em;
-  @media (max-width: 640px) {
-      flex-direction: column;
-      wc-button {
+  gap: var(--search-bar-gap);
+  padding: var(--search-bar-padding);
+  width: 100%;
+  box-sizing: border-box;
+
+  // Estilos responsivos
+  @media (max-width: var(--search-bar-mobile-breakpoint)) {
+    flex-direction: column;
+    
+    // En móvil, el botón ocupa todo el ancho
+    ::slotted(wc-button[slot="button"]) {
+      width: 100%;
+      
+      // Asegurar que el botón interno también sea full width
+      button {
         width: 100%;
       }
     }
+    
+    // El input también full width en móvil
+    ::slotted(wc-input[slot="input"]) {
+      width: 100%;
+    }
+  }
+}
+
+// Estilos para los slots
+::slotted(wc-input[slot="input"]) {
+  flex: 1;
+  min-width: 0; // Prevenir overflow
+}
+
+::slotted(wc-button[slot="button"]) {
+  flex-shrink: 0;
+}
+
+// Estados
+:host([disabled]) {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+// Animación de focus dentro del componente
+:host(:focus-within) {
+  .search-bar {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: var(--search-bar-border-radius);
+  }
 }
