@@ -45,6 +45,12 @@ export class WcPaginator extends LitElement {
         return paginatorTemplate(this);
     }
 
+    override willUpdate(changedProps: Map<string, unknown>) {
+        if (changedProps.has('totalItems') || changedProps.has('pageSize')) {
+            this.recalculateMaxPage();
+        }
+    }
+
     override updated(changedProps: Map<string, unknown>) {
     if (
         changedProps.has('totalItems') ||
@@ -83,7 +89,6 @@ export class WcPaginator extends LitElement {
         const totalPages = this.maxPage;
         const current = this.actualPage;
         const pages: (number | PaginationDisplayItem)[] = [];
-        debugger;
         if (totalPages <= 1) {
             return [0];
         }

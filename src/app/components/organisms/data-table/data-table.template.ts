@@ -2,7 +2,6 @@
 import { html } from 'lit';
 import { WcDataTable } from './data-table';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 export const dataTableTemplate = (host: WcDataTable) => {
   const tableClasses = {
@@ -51,13 +50,12 @@ export const dataTableTemplate = (host: WcDataTable) => {
           ` : ''}
         </wc-table>
       </div>
-      
       ${!host.loading && host.allFilteredData.length > 0 ? html`
         <wc-paginator 
           .totalItems=${host.allFilteredData.length} 
           .pageSize=${host.pageSize} 
           .pageSizeOptions=${host.pageSizeOptions}
-          .currentPage=${host.currentPage}
+          .actualPage=${host.currentPage}
           @page-change=${(e: CustomEvent) => host.handlePageChange(e)}
         >
         </wc-paginator>

@@ -30,7 +30,7 @@ export const paginatorTemplate = (host: WcPaginator) => html`
 
         <div class="paginator__info">
             <wc-select
-            .value=${host.pageSizeOptions[0]}
+            .value=${host.getPageSize()}
             @change=${host.onPageSizeChange}
             >
             <span slot="displayName">Elementos</span>

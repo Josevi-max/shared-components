@@ -34,7 +34,7 @@ export class WcSelect extends LitElement {
     return selectTemplate(this);
   }
 
-  override updated(changed: Map<string, unknown>) {
+  override willUpdate(changed: Map<string, unknown>) {
     if (changed.has('value')) {
       this.syncOptionsWithValue();
     }

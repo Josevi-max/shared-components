@@ -46,10 +46,14 @@ export class WcDataTable extends LitElement {
     this.onPageChange(e);
   }
 
-  override updated(changed: Map<string, unknown>) {
+  override willUpdate(changed: Map<string, unknown>) {
     if (changed.has('data')) {
       this.allFilteredData = [...this.data];
-      this.paginatedData = this.allFilteredData.slice(0, this.pageSize);
+    }
+    if (changed.has('data') || changed.has('currentPage') || changed.has('pageSize')) {
+      const start = this.currentPage * this.pageSize;
+      const end = start + this.pageSize;
+      this.paginatedData = this.allFilteredData.slice(start, end);
     }
   }
 
@@ -72,18 +76,15 @@ export class WcDataTable extends LitElement {
         String(val).toLowerCase().includes(this.searchTerm.toLowerCase())
       )
     );
-    this.updatePagination(0);
+    this.currentPage = 0;
+    this.requestUpdate();
   };
 
   private onPageChange = (e: CustomEvent<PageEvent>) => {
     const { pageIndex, pageSize } = e.detail;
-    this.updatePagination(pageIndex, pageSize);
+    this.currentPage = pageIndex;
+    this.pageSize = pageSize;
+    this.requestUpdate();
   };
 
-  private updatePagination(pageIndex: number, pageSize = this.pageSize) {
-    this.pageSize = pageSize;
-    const start = pageIndex * pageSize;
-    const end = start + pageSize;
-    this.paginatedData = this.allFilteredData.slice(start, end);
-  }
 }

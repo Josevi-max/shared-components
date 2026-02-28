@@ -263,23 +263,6 @@ const data = [
 ></wc-data-table>
 \`\`\`
 
-## Eventos
-
-\`\`\`javascript
-const table = document.querySelector('wc-data-table');
-
-table.addEventListener('row-click', (e) => {
-  console.log('Fila clicada:', e.detail);
-});
-
-table.addEventListener('search', (e) => {
-  console.log('Búsqueda:', e.detail);
-});
-
-table.addEventListener('page-change', (e) => {
-  console.log('Cambio de página:', e.detail);
-});
-\`\`\`
 
 ## Filtrado
 
@@ -289,7 +272,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
     },
   },
   argTypes: {
-    // Propiedades del componente
     searchTerm: {
       control: 'text',
       description: 'Término de búsqueda actual',
@@ -370,7 +352,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // Eventos
     onRowClick: {
       action: 'row-click',
       description: 'Evento al hacer clic en una fila',
@@ -396,7 +377,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Contenedor principal
     datatablePadding: {
       name: '--datatable-padding',
       control: 'text',
@@ -458,7 +438,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Search Container
     searchContainerPadding: {
       name: '--datatable-search-padding',
       control: 'text',
@@ -500,7 +479,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Table Container
     tableContainerPadding: {
       name: '--datatable-table-padding',
       control: 'text',
@@ -543,7 +521,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Results Info
     resultsInfoPadding: {
       name: '--datatable-info-padding',
       control: 'text',
@@ -595,7 +572,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Loading State
     loadingOverlayBackground: {
       name: '--datatable-loading-overlay',
       control: 'text',
@@ -637,7 +613,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Empty State
     emptyMinHeight: {
       name: '--datatable-empty-min-height',
       control: 'text',
@@ -689,7 +664,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
       },
     },
 
-    // CSS Custom Properties - Responsive
     mobileBreakpoint: {
       name: '--datatable-mobile-breakpoint',
       control: 'text',
@@ -736,7 +710,6 @@ El filtrado se realiza sobre todas las columnas automáticamente.
 export default meta;
 type Story = StoryObj<DataTableArgs>;
 
-// Template base
 const Template = (args: DataTableArgs) => {
   const styles = `
     ${args.datatablePadding ? `--datatable-padding: ${args.datatablePadding};` : ''}
@@ -798,7 +771,6 @@ const Template = (args: DataTableArgs) => {
   `;
 };
 
-// Historia por defecto
 export const Default: Story = {
   args: {
     pageSize: 10,
@@ -817,7 +789,6 @@ export const Default: Story = {
   },
 };
 
-// Historia con muchas filas
 export const ManyRows: Story = {
   args: {
     pageSize: 10,
@@ -835,7 +806,6 @@ export const ManyRows: Story = {
   },
 };
 
-// Historia con columnas avanzadas
 export const AdvancedColumns: Story = {
   args: {
     pageSize: 10,
@@ -853,26 +823,6 @@ export const AdvancedColumns: Story = {
   },
 };
 
-// Historia con datos financieros
-export const FinanceData: Story = {
-  args: {
-    pageSize: 10,
-    showStats: true,
-    columns: financeColumns,
-    data: generateSampleData(50),
-    placeholder: 'Buscar empleados...',
-  },
-  render: Template,
-  parameters: {
-    docs: {
-      description: {
-        story: 'DataTable con datos financieros: salarios, departamentos y fechas.',
-      },
-    },
-  },
-};
-
-// Historia con búsqueda inicial
 export const WithSearchTerm: Story = {
   args: {
     searchTerm: 'Ana',
@@ -891,7 +841,6 @@ export const WithSearchTerm: Story = {
   },
 };
 
-// Historia con diferentes opciones de paginación
 export const CustomPageSizeOptions: Story = {
   args: {
     pageSize: 25,
@@ -910,7 +859,6 @@ export const CustomPageSizeOptions: Story = {
   },
 };
 
-// Historia con página inicial específica
 export const StartingPage: Story = {
   args: {
     currentPage: 3,
@@ -929,7 +877,6 @@ export const StartingPage: Story = {
   },
 };
 
-// Historia con estado de carga
 export const Loading: Story = {
   args: {
     loading: true,
@@ -948,7 +895,6 @@ export const Loading: Story = {
   },
 };
 
-// Historia sin datos
 export const Empty: Story = {
   args: {
     pageSize: 10,
@@ -966,7 +912,6 @@ export const Empty: Story = {
   },
 };
 
-// Historia con filtrado que no encuentra resultados
 export const NoResults: Story = {
   args: {
     searchTerm: 'xyz123',
@@ -985,7 +930,6 @@ export const NoResults: Story = {
   },
 };
 
-// Historia con vista móvil
 export const MobileView: Story = {
   args: {
     pageSize: 5,
